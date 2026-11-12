@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard evento</title>
+    <link rel="stylesheet" href="../css/style.css?v=13">
+</head>
+
+<body class="pagina-dashboard">
+
+    <div id="pagina">
+
+        <a href="index.html" class="link-indietro">&larr; Torna agli eventi</a>
+        <button type="button" id="bottoneLogout" class="bottone bottone-secondario" title="Esci">Esci</button>
+
+        <h1 id="titoloEvento">Dashboard evento</h1>
+
+        <div id="dashboard" class="dashboard">
+
+            <section id="sezioneSinistra" class="dashboard-sezione">
+
+                <h2>Presenze</h2>
+                <p id="statoPresenze" class="nota">Caricamento in corso...</p>
+
+                <div class="contatori">
+                    <div class="contatore contatore-verde">
+                        <span class="contatore-valore" id="presenti">-</span>
+                        <span class="contatore-etichetta">Presenti</span>
+                    </div>
+                    <div class="contatore">
+                        <span class="contatore-valore" id="totali">-</span>
+                        <span class="contatore-etichetta">Invitati totali</span>
+                    </div>
+                    <div class="contatore contatore-rosso">
+                        <span class="contatore-valore" id="mancanti">-</span>
+                        <span class="contatore-etichetta">Mancanti</span>
+                    </div>
+                </div>
+
+                <button type="button" id="aggiornaPresenze" class="bottone bottone-primario bottone-piccolo">Aggiorna</button>
+
+                <h3 class="titolo-registri">Ingressi registrati</h3>
+                <p id="statoIngressi" class="nota"></p>
+                <ul id="registriIngresso" class="registri"></ul>
+
+            </section>
+
+            <section id="sezioneDestra" class="dashboard-sezione">
+
+                <h2>Dispositivo</h2>
+                <p id="statoDispositivo" class="nota">In attesa dell'ESPcam...</p>
+
+                <dl class="scheda-dispositivo">
+                    <dt>RAM</dt>
+                    <dd id="dispositivoRam">-</dd>
+                    <dt>WiFi</dt>
+                    <dd id="dispositivoWifi">-</dd>
+                    <dt>IP</dt>
+                    <dd id="dispositivoIp">-</dd>
+                </dl>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <script src="../js/api.js?v=4"></script>
+    <script src="../js/dashboard.js?v=7"></script>
+
+</body>
+</html>

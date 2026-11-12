@@ -1,0 +1,20 @@
+/*
+ * Esempio di configurazione locale dell'ESPcam.
+ * Copiare questo file in impostazioni_locali.h e inserire i propri valori.
+ * impostazioni_locali.h non e versionato.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#pragma once
+
+// Rete Wi-Fi a cui si collega la ESPcam
+#define WIFI_SSID     "la-tua-rete"
+#define WIFI_PASSWORD "la-tua-password"
+
+// Host e porta del backend Go, l'unico con cui l'ESPcam parla
+#define BACKEND_HOST "192.168.1.100"
+#define BACKEND_PORT "8080"
+
+// Id della camera gestita da questa ESPcam
+#define ID_CAM 1

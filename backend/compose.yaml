@@ -1,0 +1,38 @@
+
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      TZ: Europe/Rome
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: evento
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      TZ: Europe/Rome
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: evento
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      MAIL_FROM: ${MAIL_FROM}
+      # Chiave di firma degli access token: il server non parte se manca o se
+      # e troppo corta. Cambiarla fa saltare tutte le sessioni aperte.
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      mysql:
+        condition: service_healthy

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Eventi</title>
+    <link rel="stylesheet" href="../css/style.css?v=13">
+</head>
+
+<body>
+
+    <div id="pagina">
+
+        <h1>Gestione Eventi</h1>
+
+        <button type="button" id="aggiungiEvento" title="Aggiungi evento">+</button>
+        <button type="button" id="bottoneLogout" class="bottone bottone-secondario" title="Esci">Esci</button>
+
+        <div id="listaEventi" class="carta">
+            <h2>Eventi</h2>
+            <div id="contenitoreEventi"></div>
+        </div>
+
+        <div id="dettagliEvento" class="carta" hidden>
+            <button type="button" id="indietro" class="bottone bottone-secondario">Indietro</button>
+            <h2 id="dettaglioNome"></h2>
+            <p>Dal <span id="dettaglioInizio"></span> al <span id="dettaglioFine"></span></p>
+            <p>Dalle <span id="dettaglioOraInizio"></span> alle <span id="dettaglioOraFine"></span></p>
+
+            <div class="azioni-evento">
+                <button type="button" id="modificaEvento" class="bottone bottone-primario">Modifica evento</button>
+                <button type="button" id="mostraFormOspite" class="bottone bottone-secondario">Aggiungi persona all'evento</button>
+                <button type="button" id="bottoneCsvDettaglio" class="bottone bottone-secondario">Carica CSV</button>
+                <input type="file" id="fileCsvDettaglio" accept=".csv,text/csv" hidden>
+            </div>
+
+            <form id="formModificaEvento" hidden>
+
+                <h3>Modifica evento</h3>
+                <p class="nota">Le modifiche vengono comunicate via email a tutti gli invitati.</p>
+
+                <label for="modificaNome">Nome evento</label>
+                <input type="text" id="modificaNome" required>
+
+                <label for="modificaDataInizio">Data inizio</label>
+                <input type="date" id="modificaDataInizio" required>
+
+                <label for="modificaDataFine">Data fine</label>
+                <input type="date" id="modificaDataFine" required>
+
+                <label for="modificaOraInizio">Ora inizio</label>
+                <input type="time" id="modificaOraInizio" required>
+
+                <label for="modificaOraFine">Ora fine</label>
+                <input type="time" id="modificaOraFine" required>
+
+                <span class="errore" id="erroreModifica"></span>
+
+                <div class="azioni-form">
+                    <button type="button" id="salvaModifica" class="bottone bottone-verde">Salva modifiche</button>
+                    <button type="button" id="annullaModifica" class="bottone bottone-secondario">Annulla</button>
+                </div>
+            </form>
+
+            <span id="esitoModifica"></span>
+
+            <form id="formOspiteEvento" hidden>
+                <label for="nomeOspiteEvento">Nome</label>
+                <input type="text" id="nomeOspiteEvento" required>
+                <label for="cognomeOspiteEvento">Cognome</label>
+                <input type="text" id="cognomeOspiteEvento" required>
+                <label for="emailOspiteEvento">Email</label>
+                <input type="email" id="emailOspiteEvento">
+                <div class="azioni-form">
+                    <button type="button" id="confermaOspiteEvento" class="bottone bottone-verde">Aggiungi</button>
+                    <button type="button" id="annullaOspiteEvento" class="bottone bottone-secondario">Annulla</button>
+                </div>
+            </form>
+
+            <div id="ospitiDisponibiliContainer">
+                <h3>Ospiti Disponibili</h3>
+                <div id="listaOspitiDisponibili"></div>
+            </div>
+
+            <h3>Invitati</h3>
+            <ul id="dettaglioInvitati"></ul>
+
+            <div class="azioni-evento" style="margin-top:20px;">
+                <button type="button" id="invitaOspiti" class="bottone bottone-verde">Invita invitati</button>
+            </div>
+
+            <h3>QR Code degli invitati</h3>
+            <div id="qrcodesEvento"></div>
+        </div>
+
+        <div id="schermataInviti" class="carta" hidden>
+            <h2>Evento creato!</h2>
+            <p>Vuoi invitare gli ospiti via email? Riceveranno un messaggio con il QR code di accesso.</p>
+            <div class="azioni-form">
+                <button type="button" id="inviaInviti" class="bottone bottone-verde">Invita</button>
+                <button type="button" id="tornaLista" class="bottone bottone-secondario">Torna alla lista</button>
+            </div>
+            <span id="esitoInviti"></span>
+        </div>
+
+        <form id="formEvento" class="carta" hidden>
+
+            <h2>Nuovo evento</h2>
+
+            <label for="nomeEvento">Nome evento</label>
+            <input type="text" id="nomeEvento" required>
+
+            <label for="dataInizio">Data inizio</label>
+            <input type="date" id="dataInizio" required>
+
+            <label for="dataFine">Data fine</label>
+            <input type="date" id="dataFine" required>
+
+            <label for="oraInizio">Ora inizio</label>
+            <input type="time" id="oraInizio" required>
+
+            <label for="oraFine">Ora fine</label>
+            <input type="time" id="oraFine" required>
+
+            <label for="camEvento">Camera</label>
+            <select id="camEvento" required></select>
+
+            <label for="nomeNuovaCam">Nuova camera</label>
+            <div class="aggiungi-manuali">
+                <input type="text" id="nomeNuovaCam" placeholder="Nome camera">
+                <button type="button" id="bottoneAggiungiCam" class="bottone bottone-secondario bottone-piccolo">Aggiungi camera</button>
+            </div>
+
+            <span class="errore" id="erroreEvento"></span>
+
+            <button type="button" id="aggiungiOspiti" class="bottone bottone-primario">Aggiungi ospiti</button>
+
+        </form>
+
+        <div id="listaOspiti" class="carta" hidden>
+
+            <h3>Ospiti da invitare</h3>
+
+            <div id="righeOspiti"></div>
+            <span id="conteggioOspiti"></span>
+
+            <div class="aggiungi-manuali">
+                <input type="text" id="nomeManuale" placeholder="Nome">
+                <input type="text" id="cognomeManuale" placeholder="Cognome">
+                <input type="email" id="emailManuale" placeholder="Email">
+                <button type="button" id="bottoneAggiungiManuale" class="bottone bottone-primario bottone-piccolo">Aggiungi persona</button>
+            </div>
+
+            <div class="csv-controls">
+                <button type="button" id="bottoneCsv" class="bottone bottone-secondario bottone-piccolo">Carica CSV</button>
+                <input type="file" id="fileCsv" accept=".csv,text/csv" hidden>
+                <span id="esitoCsv"></span>
+            </div>
+
+            <button type="button" id="confermaEvento" class="bottone bottone-verde" disabled>Conferma ospiti e crea evento</button>
+
+        </div>
+
+    </div>
+
+    <script src="../js/qrcode.min.js"></script>
+    <script src="../js/api.js?v=4"></script>
+    <script src="../js/script.js?v=14"></script>
+
+</body>
+</html>

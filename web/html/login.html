@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi - Gestione Eventi</title>
+    <link rel="stylesheet" href="../css/style.css?v=13">
+</head>
+
+<body>
+
+    <div id="pagina">
+
+        <h1>Gestione Eventi</h1>
+
+        <div class="carta" id="cartaLogin">
+
+            <h2 style="text-align:center;">Accedi</h2>
+            <p class="nota" style="text-align:center;">Inserisci le tue credenziali per continuare.</p>
+
+            <form id="formLogin">
+
+                <label for="emailLogin">Email</label>
+                <input type="email" id="emailLogin" required autocomplete="email" placeholder="nome@esempio.it">
+
+                <label for="passwordLogin">Password</label>
+                <input type="password" id="passwordLogin" required autocomplete="current-password">
+
+                <p id="erroreLogin" class="errore" hidden></p>
+
+                <button type="submit" id="bottoneLogin" class="bottone bottone-primario" style="width:100%;">Accedi</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="../js/api.js?v=4"></script>
+    <script src="../js/login.js?v=1"></script>
+
+</body>
+</html>

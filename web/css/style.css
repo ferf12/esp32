@@ -1,0 +1,906 @@
+/* Stile unico per login, eventi e dashboard */
+
+:root {
+    --ink: #12222f;
+    --ink-2: #1c3648;
+    --sfondo: #eef2f6;
+    --superficie: #ffffff;
+    --superficie-2: #f6f8fb;
+    --bordo: #dfe6ed;
+    --testo: #16212b;
+    --soft: #5e6f7f;
+    --primario: #0e7c86;
+    --primario-hover: #0a656d;
+    --primario-soft: #e1f3f4;
+    --verde: #1f9d63;
+    --verde-hover: #178150;
+    --verde-soft: #e6f6ee;
+    --rosso: #d64545;
+    --rosso-hover: #b93838;
+    --rosso-soft: #fdecec;
+    --r-s: 8px;
+    --r-m: 12px;
+    --r-l: 18px;
+    --ombra: 0 1px 2px rgba(18, 34, 47, .06), 0 10px 30px rgba(18, 34, 47, .10);
+    --ombra-hover: 0 2px 4px rgba(18, 34, 47, .08), 0 12px 28px rgba(14, 124, 134, .16);
+    --focus: 0 0 0 3px rgba(14, 124, 134, .30);
+    --colonna: 720px;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ---------- Base ---------- */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(180deg, var(--ink) 0, var(--ink-2) 250px, var(--sfondo) 250px);
+    color: var(--testo);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.pagina-dashboard {
+    --colonna: 1100px;
+}
+
+#pagina {
+    width: 100%;
+    max-width: var(--colonna);
+    padding-top: 64px;
+}
+
+h1 {
+    margin-bottom: 26px;
+    color: #fff;
+    font-size: clamp(1.7rem, 4.5vw, 2.3rem);
+    font-weight: 750;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+}
+
+h2 {
+    margin-bottom: 14px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+}
+
+h3 {
+    margin: 22px 0 10px;
+    font-size: 1.05rem;
+    font-weight: 650;
+}
+
+p {
+    margin-bottom: 6px;
+}
+
+/* ---------- Carte ---------- */
+
+.carta {
+    margin-bottom: 20px;
+    padding: 28px;
+    background: var(--superficie);
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-l);
+    box-shadow: var(--ombra);
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 14px;
+    }
+
+    .carta {
+        padding: 20px;
+    }
+}
+
+/* ---------- Pulsanti ---------- */
+
+button {
+    font-family: inherit;
+}
+
+.bottone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border: 1px solid transparent;
+    border-radius: var(--r-s);
+    font-size: .95rem;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color .15s, border-color .15s, box-shadow .15s, transform .1s;
+}
+
+.bottone:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.bottone:focus-visible,
+#aggiungiEvento:focus-visible,
+#contenitoreEventi button:focus-visible {
+    outline: none;
+    box-shadow: var(--focus);
+}
+
+.bottone-primario {
+    background: var(--primario);
+    color: #fff;
+}
+
+.bottone-primario:hover {
+    background: var(--primario-hover);
+}
+
+.bottone-verde {
+    background: var(--verde);
+    color: #fff;
+}
+
+.bottone-verde:hover {
+    background: var(--verde-hover);
+}
+
+.bottone-rosso {
+    background: var(--rosso-soft);
+    color: var(--rosso);
+    border-color: #f5c6c6;
+}
+
+.bottone-rosso:hover {
+    background: var(--rosso);
+    border-color: var(--rosso);
+    color: #fff;
+}
+
+.bottone-secondario {
+    background: var(--superficie);
+    color: var(--testo);
+    border-color: var(--bordo);
+}
+
+.bottone-secondario:hover {
+    background: var(--superficie-2);
+    border-color: var(--soft);
+}
+
+.bottone-piccolo {
+    padding: 7px 13px;
+    font-size: .875rem;
+    flex-shrink: 0;
+}
+
+.bottone:disabled {
+    background: #e3e8ed;
+    border-color: #e3e8ed;
+    color: #93a1ae;
+    cursor: not-allowed;
+}
+
+/* Pulsanti fissi, allineati alla colonna dei contenuti */
+#bottoneLogout {
+    position: fixed;
+    top: 18px;
+    left: max(20px, calc(50% - var(--colonna) / 2));
+    z-index: 10;
+    padding: 9px 16px;
+    background: var(--ink-2);
+    border-color: rgba(255, 255, 255, .22);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .28);
+}
+
+#bottoneLogout:hover {
+    background: #26475e;
+    border-color: rgba(255, 255, 255, .4);
+}
+
+/* Nella dashboard Esci va a destra, il link per tornare resta a sinistra */
+.pagina-dashboard #bottoneLogout {
+    left: auto;
+    right: max(20px, calc(50% - var(--colonna) / 2));
+}
+
+#aggiungiEvento {
+    position: fixed;
+    top: 14px;
+    right: max(20px, calc(50% - var(--colonna) / 2));
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0 0 3px;
+    border: 3px solid rgba(255, 255, 255, .9);
+    border-radius: 50%;
+    background: var(--verde);
+    color: #fff;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(31, 157, 99, .45);
+    transition: background-color .15s, transform .15s;
+}
+
+#aggiungiEvento:hover {
+    background: var(--verde-hover);
+    transform: scale(1.07);
+}
+
+/* ---------- Form ---------- */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    margin-top: 10px;
+    font-size: .875rem;
+    font-weight: 600;
+    color: var(--soft);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+input[type="password"] {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--superficie-2);
+    color: var(--testo);
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-s);
+    font: inherit;
+    transition: border-color .15s, box-shadow .15s, background-color .15s;
+}
+
+input::placeholder {
+    color: var(--soft);
+    opacity: .65;
+}
+
+input:hover {
+    border-color: #b7c3cf;
+}
+
+input:focus {
+    outline: none;
+    background: var(--superficie);
+    border-color: var(--primario);
+    box-shadow: var(--focus);
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--primario);
+    cursor: pointer;
+}
+
+.nota {
+    color: var(--soft);
+    font-size: .9rem;
+}
+
+#formModificaEvento .nota {
+    padding: 10px 14px;
+    background: var(--primario-soft);
+    color: var(--testo);
+    border-radius: var(--r-s);
+}
+
+.errore {
+    display: block;
+    color: var(--rosso);
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.errore:not(:empty) {
+    margin: 8px 0 4px;
+    padding: 10px 14px;
+    background: var(--rosso-soft);
+    border-radius: var(--r-s);
+}
+
+.azioni-evento,
+.azioni-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+@media (max-width: 520px) {
+
+    .azioni-evento .bottone,
+    .azioni-form .bottone {
+        flex: 1 1 100%;
+    }
+}
+
+#esitoModifica,
+#esitoInviti,
+#esitoCsv {
+    font-size: .9rem;
+    color: var(--soft);
+}
+
+#esitoModifica {
+    display: block;
+    margin-top: 14px;
+    color: var(--testo);
+    font-weight: 600;
+}
+
+#esitoModifica:empty {
+    display: none;
+}
+
+#esitoInviti {
+    display: block;
+    margin-top: 12px;
+}
+
+/* ---------- Login ---------- */
+
+/* Sfondo scuro pieno e carta centrata */
+body:has(#cartaLogin) {
+    align-items: center;
+    background: radial-gradient(1200px 600px at 50% -10%, var(--ink-2), var(--ink));
+}
+
+body:has(#cartaLogin) #pagina {
+    max-width: 420px;
+    padding-top: 0;
+}
+
+body:has(#cartaLogin) h1 {
+    text-align: center;
+}
+
+#cartaLogin {
+    padding: 32px;
+}
+
+#cartaLogin .nota {
+    margin-bottom: 14px;
+}
+
+#formLogin #bottoneLogin {
+    margin-top: 14px;
+    padding: 13px 18px;
+}
+
+/* ---------- Lista eventi ---------- */
+
+#contenitoreEventi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#contenitoreEventi button {
+    width: 100%;
+    padding: 16px 18px;
+    text-align: left;
+    background: var(--superficie-2);
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-m);
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s, transform .15s, background-color .15s;
+}
+
+#contenitoreEventi button:hover {
+    background: var(--superficie);
+    border-color: var(--primario);
+    box-shadow: var(--ombra-hover);
+    transform: translateY(-1px);
+}
+
+#contenitoreEventi h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 2px;
+    font-size: 1.1rem;
+    color: var(--testo);
+}
+
+/* Solo il periodo: l'id evento e uno span dentro l'h3 e ha regole sue */
+#contenitoreEventi button > span {
+    color: var(--soft);
+    font-size: .9rem;
+}
+
+/* Id dell'evento mostrato accanto al nome */
+.id-evento {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 8px;
+    background: var(--primario-soft);
+    color: var(--primario);
+    border-radius: 999px;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: .78em;
+    font-weight: 650;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+/* Sulla barra scura della dashboard l'id va in chiaro */
+#titoloEvento .id-evento {
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+}
+
+/* Evento in corso: puntino pulsante, etichetta e filo verde a sinistra */
+#contenitoreEventi h3.in-corso::before {
+    content: "";
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--verde);
+    animation: pulsa 2s ease-out infinite;
+}
+
+#contenitoreEventi h3.in-corso::after {
+    content: "In corso";
+    margin-left: auto;
+    padding: 2px 10px;
+    background: var(--verde-soft);
+    color: var(--verde-hover);
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 650;
+}
+
+#contenitoreEventi button:has(h3.in-corso) {
+    border-left: 4px solid var(--verde);
+}
+
+@keyframes pulsa {
+    0% {
+        box-shadow: 0 0 0 0 rgba(31, 157, 99, .55);
+    }
+
+    70%,
+    100% {
+        box-shadow: 0 0 0 9px rgba(31, 157, 99, 0);
+    }
+}
+
+#contenitoreEventi:empty::before {
+    content: "Nessun evento ancora. Usa il pulsante + per crearne uno.";
+    display: block;
+    padding: 28px 16px;
+    text-align: center;
+    color: var(--soft);
+    border: 1px dashed var(--bordo);
+    border-radius: var(--r-m);
+}
+
+/* ---------- Dettaglio evento ---------- */
+
+#dettagliEvento #indietro {
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    font-size: .9rem;
+}
+
+#dettaglioNome {
+    margin-bottom: 8px;
+    font-size: 1.7rem;
+    letter-spacing: -0.02em;
+}
+
+#dettagliEvento > p {
+    margin-bottom: 2px;
+    color: var(--soft);
+}
+
+#dettagliEvento > p span {
+    color: var(--testo);
+    font-weight: 600;
+}
+
+#formModificaEvento,
+#formOspiteEvento {
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--superficie-2);
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-m);
+}
+
+#formModificaEvento h3 {
+    margin-top: 0;
+}
+
+#formModificaEvento input,
+#formOspiteEvento input {
+    background: var(--superficie);
+}
+
+#dettagliEvento h3 {
+    color: var(--testo);
+}
+
+/* Invitati */
+#dettaglioInvitati {
+    list-style: none;
+    overflow: hidden;
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-m);
+}
+
+#dettaglioInvitati:empty {
+    display: none;
+}
+
+#dettaglioInvitati li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--superficie);
+}
+
+#dettaglioInvitati li + li {
+    border-top: 1px solid var(--bordo);
+}
+
+/* Ospiti disponibili generati da JS */
+#listaOspitiDisponibili {
+    max-height: 260px;
+    overflow-y: auto;
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-m);
+}
+
+#listaOspitiDisponibili:empty {
+    display: none;
+}
+
+#listaOspitiDisponibili div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 !important;
+    padding: 9px 14px;
+    background: var(--superficie);
+}
+
+#listaOspitiDisponibili div + div {
+    border-top: 1px solid var(--bordo);
+}
+
+#listaOspitiDisponibili div .bottone {
+    margin-left: auto;
+}
+
+/* QR code */
+#qrcodesEvento {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
+}
+
+.blocco-qr {
+    padding: 14px 12px;
+    text-align: center;
+    background: var(--superficie-2);
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-m);
+}
+
+.blocco-qr p {
+    margin-bottom: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.blocco-qr img,
+.blocco-qr canvas {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+    margin: 0 auto;
+    padding: 6px;
+    background: #fff;
+    border-radius: var(--r-s);
+}
+
+/* ---------- Nuovo evento: ospiti ---------- */
+
+#listaOspiti h3 {
+    margin-top: 0;
+}
+
+#righeOspiti {
+    max-height: 280px;
+    overflow-y: auto;
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-m);
+}
+
+#righeOspiti:empty {
+    display: none;
+}
+
+#righeOspiti div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--superficie);
+    transition: background-color .15s;
+}
+
+#righeOspiti div + div {
+    border-top: 1px solid var(--bordo);
+}
+
+#righeOspiti div:hover {
+    background: var(--superficie-2);
+}
+
+.mail-ospite {
+    margin-left: auto;
+    color: var(--soft);
+    font-size: .85rem;
+    word-break: break-all;
+    text-align: right;
+}
+
+#conteggioOspiti {
+    display: block;
+    padding: 8px 4px 0;
+    text-align: right;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--primario);
+}
+
+.aggiungi-manuali {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--bordo);
+}
+
+.aggiungi-manuali input[type="email"],
+.aggiungi-manuali .bottone {
+    grid-column: 1 / -1;
+}
+
+.aggiungi-manuali .bottone {
+    justify-self: start;
+}
+
+@media (max-width: 520px) {
+    .aggiungi-manuali {
+        grid-template-columns: 1fr;
+    }
+}
+
+.csv-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+#confermaEvento {
+    width: 100%;
+    margin-top: 22px;
+    padding: 14px 18px;
+    font-size: 1rem;
+}
+
+#aggiungiOspiti {
+    margin-top: 22px;
+    padding: 13px 18px;
+}
+
+#schermataInviti {
+    padding: 40px 28px;
+    text-align: center;
+}
+
+#schermataInviti .azioni-form {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* ---------- Dashboard ---------- */
+
+.link-indietro {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #cfe0ec;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-indietro:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 800px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dashboard-sezione {
+    min-height: 220px;
+    padding: 28px;
+    background: var(--superficie);
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-l);
+    box-shadow: var(--ombra);
+}
+
+.contatori {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 16px 0 20px;
+}
+
+.contatore {
+    flex: 1 1 110px;
+    padding: 18px 10px;
+    text-align: center;
+    background: var(--superficie-2);
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-m);
+}
+
+.contatore-verde {
+    background: var(--verde-soft);
+    border-color: #b5e2c9;
+}
+
+.contatore-rosso {
+    background: var(--rosso-soft);
+    border-color: #f3c3c3;
+}
+
+.contatore-valore {
+    display: block;
+    font-size: 2.6rem;
+    font-weight: 750;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.contatore-verde .contatore-valore {
+    color: var(--verde-hover);
+}
+
+.contatore-rosso .contatore-valore {
+    color: var(--rosso-hover);
+}
+
+.contatore-etichetta {
+    display: block;
+    margin-top: 6px;
+    font-size: .88rem;
+    color: var(--soft);
+}
+
+.titolo-registri {
+    margin: 26px 0 4px;
+    padding-top: 22px;
+    border-top: 1px solid var(--bordo);
+}
+
+.registri {
+    list-style: none;
+    max-height: 320px;
+    margin-top: 12px;
+    overflow-y: auto;
+}
+
+.registri:empty {
+    margin: 0;
+}
+
+.registri li {
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    background: var(--superficie-2);
+    border-left: 4px solid var(--verde);
+    border-radius: 0 var(--r-s) var(--r-s) 0;
+    font-size: .95rem;
+}
+
+.scheda-dispositivo {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0;
+    margin-top: 16px;
+    border: 1px solid var(--bordo);
+    border-radius: var(--r-m);
+    overflow: hidden;
+}
+
+.scheda-dispositivo dt,
+.scheda-dispositivo dd {
+    padding: 12px 16px;
+    border-top: 1px solid var(--bordo);
+}
+
+.scheda-dispositivo dt:first-of-type,
+.scheda-dispositivo dt:first-of-type + dd {
+    border-top: none;
+}
+
+.scheda-dispositivo dt {
+    background: var(--superficie-2);
+    font-size: .875rem;
+    font-weight: 600;
+    color: var(--soft);
+}
+
+.scheda-dispositivo dd {
+    font-size: 1.02rem;
+    font-weight: 700;
+    word-break: break-word;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Accessibilità ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
